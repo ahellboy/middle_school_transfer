@@ -42,7 +42,7 @@ export function ContentTab({
       </section>
 
       <section className="panel">
-        <h2>体制内对照</h2>
+        <h2>未来大学预估</h2>
         <p className="muted">国内校名和国际举例都出现在学生结果上。按排位定档，按目标国家换学校。这是路径参照，不要写成录取预测。</p>
         {rank?.options.map((option) => {
           const entry = draft.domesticAnchor[option.value] ?? {

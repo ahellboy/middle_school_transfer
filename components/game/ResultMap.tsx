@@ -152,11 +152,12 @@ export function ResultMap({
       )}
 
       <section className="card">
-        <p className="kicker">体制内对照</p>
+        <p className="kicker">未来大学预估</p>
         <h3>{live.domesticAnchor.tierLabel}</h3>
         <p>{live.domesticAnchor.equivalent}</p>
-        {live.domesticAnchor.qsBand ? <p>{live.domesticAnchor.qsBand}</p> : null}
-        {live.domesticAnchor.abroad ? <p>{live.domesticAnchor.abroad}</p> : null}
+        {live.domesticAnchor.qsBand || live.domesticAnchor.abroad ? (
+          <p>{`${live.domesticAnchor.qsBand ?? ""}${live.domesticAnchor.abroad ?? ""}`}</p>
+        ) : null}
       </section>
 
       <section className="card no-print">

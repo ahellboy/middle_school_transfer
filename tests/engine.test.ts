@@ -94,7 +94,8 @@ describe("evaluate", () => {
       [32, 28, 22],
     );
     assert.match(report.domesticAnchor.equivalent, /杉达/);
-    assert.match(report.domesticAnchor.qsBand, /不放进/);
+    assert.match(report.domesticAnchor.qsBand, /前 100/);
+    assert.match(report.domesticAnchor.abroad, /格拉斯哥大学/);
     assert.ok(report.actionRoadmap.some((item) => item.includes("衔接")));
     assert.ok(report.actionRoadmap.every((item) => !item.includes("学籍")));
   });

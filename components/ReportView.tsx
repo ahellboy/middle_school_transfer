@@ -62,11 +62,12 @@ export function ReportView({
 
       <div className="grid-2">
         <section className="card">
-          <p className="kicker">体制内对照</p>
+          <p className="kicker">未来大学预估</p>
           <h3>{report.domesticAnchor.tierLabel}</h3>
           <p>{report.domesticAnchor.equivalent}</p>
-          {report.domesticAnchor.qsBand ? <p>{report.domesticAnchor.qsBand}</p> : null}
-          {report.domesticAnchor.abroad ? <p>{report.domesticAnchor.abroad}</p> : null}
+          {report.domesticAnchor.qsBand || report.domesticAnchor.abroad ? (
+            <p>{`${report.domesticAnchor.qsBand ?? ""}${report.domesticAnchor.abroad ?? ""}`}</p>
+          ) : null}
         </section>
         <section className="card">
           <p className="kicker">接下来</p>

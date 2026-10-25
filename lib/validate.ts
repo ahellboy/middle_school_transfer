@@ -149,14 +149,14 @@ export function validateConfig(config: AlgorithmConfig): string[] {
   for (const option of rank?.options ?? []) {
     const entry = config.domesticAnchor?.[option.value];
     if (!entry?.equivalent?.trim()) {
-      errors.push(`体制内对照缺少「${option.label}」的说明`);
+      errors.push(`未来大学预估缺少「${option.label}」的说明`);
     }
     if (!entry?.qsBand?.trim()) {
-      errors.push(`体制内对照缺少「${option.label}」的国际档次`);
+      errors.push(`未来大学预估缺少「${option.label}」的国际档次`);
     }
     for (const country of countries?.options ?? []) {
       if (!entry?.abroad?.[country.value]?.trim()) {
-        errors.push(`体制内对照缺少「${option.label}」在「${country.label}」的国际举例`);
+        errors.push(`未来大学预估缺少「${option.label}」在「${country.label}」的国际举例`);
       }
     }
   }

@@ -263,11 +263,13 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   padding: 8px 8px 18px;
 }
 .result-scene {
+  grid-template-columns: minmax(180px, 280px) minmax(0, 1fr);
   grid-template-areas: "bear play";
   align-items: center;
-  min-height: 520px;
+  min-height: 0;
 }
 .bear { grid-area: bear; width: 100%; height: auto; align-self: end; filter: drop-shadow(0 12px 10px rgba(60, 50, 30, 0.12)); }
+.result-scene .bear { align-self: center; justify-self: center; }
 .room-play { grid-area: play; align-self: stretch; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
 .shelf {
   grid-area: shelf;
@@ -431,8 +433,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
       "play";
     min-height: 0;
   }
-  .result-scene { grid-template-areas: "bear" "play"; align-items: start; }
+  .result-scene { grid-template-columns: 1fr; grid-template-areas: "bear" "play"; align-items: start; }
   .bear { width: 140px; }
+  .result-scene .bear { width: min(220px, 58vw); }
   .bubble-prompt { font-size: 20px; }
   .shelf { overflow-x: auto; }
   .shelf-item { flex: 0 0 44px; }

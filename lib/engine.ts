@@ -298,7 +298,7 @@ export function evaluate(profile: Profile, config: AlgorithmConfig): EvaluationR
     domesticAnchor: {
       tier,
       tierLabel: anchor?.label ?? optionLabel(config, "shanghai_rank_tier", tier),
-      equivalent: anchor?.equivalent ?? "配置里没有这一档的体制内对照。",
+      equivalent: anchor?.equivalent ?? "配置里没有这一档的未来大学预估。",
       qsBand: anchor?.qsBand ?? "",
       abroad: anchor?.abroad?.[country] ?? "",
     },
