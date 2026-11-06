@@ -110,7 +110,7 @@ export function AdminApp() {
 
   async function publish() {
     if (!draft || errors.length > 0) return;
-    if (!confirm("发布后，新的学生评估会使用这套规则。已经生成的报告不会变。")) return;
+    if (!confirm("发布后，网站上的新评估，以及小程序里的题目文字和推荐学校，会改用这套内容。小程序体验版需要重新上传才能看到。已经生成的报告不会变。")) return;
     setBusy(true);
     const response = await fetch("/api/admin/publish", {
       method: "POST",
@@ -131,7 +131,7 @@ export function AdminApp() {
       { version: data.published.version, updatedAt: data.published.updatedAt },
       ...current,
     ]);
-    setMessage(`已发布 v${data.published.version}。`);
+    setMessage(`已发布 v${data.published.version}。题目文字和推荐学校已写入小程序配置，体验版需要重新上传。`);
   }
 
   if (auth === "loading") {

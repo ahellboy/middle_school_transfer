@@ -8,6 +8,7 @@ const PUBLISHED = path.join(DIR, "published.json");
 const DRAFT = path.join(DIR, "draft.json");
 const VERSIONS = path.join(DIR, "versions");
 const REPORTS = path.join(DIR, "reports.jsonl");
+const MINI_PUBLISHED = path.resolve(process.cwd(), "../../小程序/中学转轨/miniprogram/data/published.js");
 
 async function exists(file: string): Promise<boolean> {
   try {
@@ -79,6 +80,29 @@ export async function saveDraft(config: AlgorithmConfig): Promise<AlgorithmConfi
   return draft;
 }
 
+async function syncMiniProgramCopy(config: AlgorithmConfig): Promise<void> {
+  if (!(await exists(MINI_PUBLISHED))) return;
+  const source = await fs.readFile(MINI_PUBLISHED, "utf8");
+  const json = source.replace(/^\uFEFF?\s*module\.exports\s*=\s*/, "").replace(/;\s*$/, "");
+  const mini = JSON.parse(json) as AlgorithmConfig;
+  for (const field of config.fields) {
+    const target = mini.fields.find((item) => item.key === field.key);
+    if (!target) continue;
+    target.title = field.title;
+    target.prompt = field.prompt;
+    for (const option of field.options) {
+      const found = target.options.find((item) => item.value === option.value);
+      if (!found) continue;
+      found.label = option.label;
+      if (option.hint) found.hint = option.hint;
+      else delete found.hint;
+    }
+  }
+  if (config.recommend) mini.recommend = config.recommend;
+  if (config.classRank) mini.classRank = config.classRank;
+  await fs.writeFile(MINI_PUBLISHED, `module.exports = ${JSON.stringify(mini, null, 2)};\n`);
+}
+
 export async function publishConfig(
   config: AlgorithmConfig,
 ): Promise<{ errors?: string[]; draft?: AlgorithmConfig; published?: AlgorithmConfig }> {
@@ -101,6 +125,7 @@ export async function publishConfig(
   await fs.writeFile(PUBLISHED, text);
   const draft: AlgorithmConfig = { ...structuredClone(stamped), status: "draft" };
   await fs.writeFile(DRAFT, JSON.stringify(draft, null, 2));
+  await syncMiniProgramCopy(stamped);
   return { draft, published: stamped };
 }
 

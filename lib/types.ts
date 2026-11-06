@@ -82,11 +82,25 @@ export type DomesticEntry = {
   abroad: Record<string, string>;
 };
 
+export type RecommendBlock = {
+  title: string;
+  body: string;
+  qrSrc: string;
+};
+
+export type ClassRankCopy = {
+  title: string;
+  prompt: string;
+  options: Array<{ value: string; label: string }>;
+};
+
 export type AlgorithmConfig = {
   version: number;
   status: "draft" | "published";
   updatedAt: string;
   note: string;
+  recommend?: RecommendBlock;
+  classRank?: ClassRankCopy;
   fields: FieldDef[];
   scoreMaps: Record<string, ScoreMap>;
   fit: {
